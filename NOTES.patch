@@ -1,0 +1,59 @@
+tuple:ocaml-3.12.0 wagle$ patch -p1 < ../cross-caml.patch 
+------------------------------------------------------------------------------
+patching file Makefile
+Hunk #1 succeeded at 261 with fuzz 1 (offset 1 line).
+Hunk #2 succeeded at 337 (offset 5 lines).
+Hunk #3 FAILED at 410.
+Hunk #4 FAILED at 424.
+2 out of 4 hunks FAILED -- saving rejects to file Makefile.rej
+------------------------------------------------------------------------------
+patching file asmcomp/asmlink.ml
+Hunk #1 succeeded at 251 (offset 1 line).
+Hunk #2 succeeded at 294 (offset 2 lines).
+------------------------------------------------------------------------------
+patching file asmcomp/asmpackager.ml
+------------------------------------------------------------------------------
+patching file asmrun/Makefile
+------------------------------------------------------------------------------
+patching file bytecomp/bytelink.ml
+Hunk #1 FAILED at 431.
+Hunk #2 succeeded at 546 (offset 48 lines).
+1 out of 2 hunks FAILED -- saving rejects to file bytecomp/bytelink.ml.rej
+------------------------------------------------------------------------------
+patching file byterun/Makefile
+Hunk #1 FAILED at 22.
+1 out of 1 hunk FAILED -- saving rejects to file byterun/Makefile.rej
+------------------------------------------------------------------------------
+patching file config/Makefile-templ
+Hunk #1 FAILED at 78.
+Hunk #2 succeeded at 90 (offset 4 lines).
+Hunk #3 succeeded at 298 (offset 4 lines).
+1 out of 3 hunks FAILED -- saving rejects to file config/Makefile-templ.rej
+------------------------------------------------------------------------------
+patching file otherlibs/Makefile.shared
+------------------------------------------------------------------------------
+patching file otherlibs/dynlink/Makefile
+Hunk #1 FAILED at 71.
+1 out of 1 hunk FAILED -- saving rejects to file otherlibs/dynlink/Makefile.rej
+------------------------------------------------------------------------------
+patching file otherlibs/labltk/lib/Makefile
+Hunk #1 succeeded at 78 (offset 9 lines).
+------------------------------------------------------------------------------
+patching file otherlibs/systhreads/Makefile
+Hunk #1 succeeded at 81 (offset -5 lines).
+------------------------------------------------------------------------------
+patching file stdlib/Makefile
+------------------------------------------------------------------------------
+patching file tools/Makefile.shared
+Hunk #1 FAILED at 111.
+1 out of 1 hunk FAILED -- saving rejects to file tools/Makefile.shared.rej
+------------------------------------------------------------------------------
+patching file utils/ccomp.ml
+------------------------------------------------------------------------------
+patching file utils/ccomp.mli
+------------------------------------------------------------------------------
+patching file utils/config.mli
+------------------------------------------------------------------------------
+patching file utils/config.mlp
+Hunk #1 succeeded at 44 with fuzz 1 (offset 10 lines).
+------------------------------------------------------------------------------
