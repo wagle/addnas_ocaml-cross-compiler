@@ -72,7 +72,7 @@ install:
 installopt:
 	if $(NATDYNLINK); then \
 	  cp $(NATOBJS) dynlink.cmxa dynlink.$(A) $(LIBDIR) && \
-	  cd $(LIBDIR) && $(RANLIB) dynlink.$(A); \
+	  cd $(LIBDIR) && $(TARGETRANLIB) dynlink.$(A); \
 	fi
 
 partialclean:
