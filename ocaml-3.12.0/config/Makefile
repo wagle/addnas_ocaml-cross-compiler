@@ -187,7 +187,7 @@ SYSTEM=linux_elf
 ### Which C compiler to use for the native-code compiler.
 ### cc is better than gcc on the Mips and Alpha.
 #NATIVECC=cc
-NATIVECC=arm-none-linux-gnueabi-gcc
+NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Additional compile-time options for $(NATIVECC).
 # For cc on the Alpha:
@@ -214,7 +214,7 @@ ASM=arm-none-linux-gnueabi-as
 
 ### Command and flags to use for assembling .S files (often with preprocessing)
 # If gcc is available:
-ASPP=arm-none-linux-gnueabi-gcc -c
+ASPP=arm-none-linux-gnueabi-gcc -c -march=armv6
 # On SunOS and Solaris:
 #ASPP=as -P
 
