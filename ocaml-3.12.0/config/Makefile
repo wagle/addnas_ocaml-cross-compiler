@@ -187,7 +187,8 @@ SYSTEM=linux_elf
 ### Which C compiler to use for the native-code compiler.
 ### cc is better than gcc on the Mips and Alpha.
 #NATIVECC=cc
-NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
+#NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
+NATIVECC=gcc
 
 ### Additional compile-time options for $(NATIVECC).
 # For cc on the Alpha:
@@ -235,7 +236,8 @@ PROFILING=noprof
 #CC_PROFILE=-xpg
 
 ### How to perform a partial link
-PARTIALLD=arm-none-linux-gnueabi-ld -r $(NATIVECCLINKOPTS)
+#PARTIALLD=arm-none-linux-gnueabi-ld -r $(NATIVECCLINKOPTS)
+PARTIALLD=ld -r $(NATIVECCLINKOPTS)
 
 ############# Configuration for the contributed libraries
 
