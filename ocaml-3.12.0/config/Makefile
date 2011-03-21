@@ -210,7 +210,7 @@ NATIVECCRPATH=-Wl,-rpath
 # For the PowerPC:
 #AS=as -u -m ppc -w
 # Otherwise:
-ASM=arm-none-linux-gnueabi-as
+ASM=arm-none-linux-gnueabi-as -march=armv6
 
 ### Command and flags to use for assembling .S files (often with preprocessing)
 # If gcc is available:
