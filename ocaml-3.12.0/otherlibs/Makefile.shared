@@ -54,7 +54,7 @@ $(LIBNAME).cmxs: $(LIBNAME).cmxa lib$(CLIBNAME).$(A)
 	$(CAMLOPT) -shared -o $(LIBNAME).cmxs -I . $(LIBNAME).cmxa
 
 lib$(CLIBNAME).$(A): $(COBJS)
-	$(MKLIB) -oc $(CLIBNAME) $(COBJS) $(LDOPTS)
+	$(MKLIB) -v -oc $(CLIBNAME) $(COBJS) $(LDOPTS)
 
 install::
 	if test -f dll$(CLIBNAME)$(EXT_DLL); then \
