@@ -22,7 +22,7 @@ SUPPORTS_SHARED_LIBRARIES=true
 EXT_DLL=.so
 MKSHAREDLIBRPATH=
 EXT_LIB=.a
-CMXS=.cmxs
+CMXS=cmxs
 ### end TSIDIRECT
 
 ########## General configuration
