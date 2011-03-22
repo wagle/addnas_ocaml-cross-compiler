@@ -47,6 +47,9 @@ CCOMPTYPE=cc
 TOOLCHAIN=cc
 NATDYNLINK=true
 CMXS=cmxs
+#XGCC=arm-none-linux-gnueabi-
+XXX=/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-
+
 ### end TSIDIRECT
 
 ########## General configuration
@@ -122,21 +125,21 @@ RANLIBCMD=ranlib
 
 ### How to invoke ranlib (for a 'target' library)
 # BSD-style:
-TARGETRANLIB=arm-none-linux-gnueabi-ranlib
-TARGETRANLIBCMD=arm-none-linux-gnueabi-ranlib
+TARGETRANLIB=$(XXX)ranlib
+TARGETRANLIBCMD=$(XXX)ranlib
 # If ranlib is not needed:
 #TARGETRANLIB=ar rs
 #TARGETRANLIBCMD=
 
 ### How to invoke ar (for a 'target' library)
-TARGETAR=arm-none-linux-gnueabi-ar
+TARGETAR=$(XXX)ar
 
 SYSLIB=-l$(1)
 #ml let syslib x = "-l"^x;;
 
 ### How to build a static library
 MKLIB=$(TARGETAR) rc \$(1) \$(2); $(TARGETRANLIB) \$(1)
-#ml let mklib out files opts = Printf.sprintf "arm-none-linux-gnueabi-ar rc %s %s %s; arm-none-linux-gnueabi-ranlib %s" out opts files out;;
+#ml let mklib out files opts = Printf.sprintf "/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ar rc %s %s %s; /root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ranlib %s" out opts files out;;
 
 ### Shared library support
 # Extension for shared libraries: so if supported, a if not supported
@@ -149,7 +152,7 @@ CUSTOM_IF_NOT_SHARED=
 SHAREDCCCOMPOPTS=-fPIC
 # How to build a shared library, invoked with output .so as first arg
 # and object files as remaining args
-MKSHAREDLIB=arm-none-linux-gnueabi-gcc -shared -o
+MKSHAREDLIB=$(XXX)gcc -shared -o
 # Compile-time option to $(BYTECC) to add a directory to be searched
 # at run-time for shared libraries
 BYTECCRPATH=-Wl,-rpath,
@@ -215,7 +218,7 @@ SYSTEM=linux_elf
 ### Which C compiler to use for the native-code compiler.
 ### cc is better than gcc on the Mips and Alpha.
 #NATIVECC=cc
-NATIVECC=arm-none-linux-gnueabi-gcc
+NATIVECC=$(XXX)gcc
 
 NATIVECCLINKOPTS=
 NATIVECCLIBS= -lm  -ldl
@@ -242,11 +245,11 @@ NATIVECCRPATH=-Wl,-rpath,
 # For the PowerPC:
 #AS=as -u -m ppc -w
 # Otherwise:
-ASM=arm-none-linux-gnueabi-as
+ASM=$(XXX)as
 
 ### Command and flags to use for assembling .S files (often with preprocessing)
 # If gcc is available:
-ASPP=arm-none-linux-gnueabi-gcc -c
+ASPP=$(XXX)gcc -c
 # On SunOS and Solaris:
 #ASPP=as -P
 
@@ -267,7 +270,7 @@ CC_PROFILE=-pg
 #CC_PROFILE=-xpg
 
 ### How to perform a partial link
-PARTIALLD=arm-none-linux-gnueabi-ld -r $(NATIVECCLINKOPTS)
+PARTIALLD=$(XXX)ld -r $(NATIVECCLINKOPTS)
 
 PACKLD=$(PARTIALLD) $(NATIVECCLINKOPTS) -o
 
@@ -348,13 +351,13 @@ DBM_LINK=-lgdbm
 ### Compilers for producing executables ('local' and 'target' ones)
 MKEXE=$(BYTECC)
 #MKEXE=gcc -Wall
-TARGETMKEXE=arm-none-linux-gnueabi-gcc
+TARGETMKEXE=$(XXX)gcc
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 #MKDLL=gcc --shared
-MKDLL=arm-none-linux-gnueabi-gcc --shared
-TARGETMKDLL=arm-none-linux-gnueabi-gcc --shared
+MKDLL=$(XXX)gcc --shared
+TARGETMKDLL=$(XXX)gcc --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL=arm-none-linux-gnueabi-gcc -Wall --shared
-TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc --shared
+MKMAINDLL=$(XXX)gcc -Wall --shared
+TARGETMKMAINDLL=$(XXX)gcc --shared
