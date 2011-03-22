@@ -215,8 +215,7 @@ SYSTEM=linux_elf
 ### Which C compiler to use for the native-code compiler.
 ### cc is better than gcc on the Mips and Alpha.
 #NATIVECC=cc
-#NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
-NATIVECC=arm-none-linux-gnueabi-gcc -Wall
+NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
 
 NATIVECCLINKOPTS=
 NATIVECCLIBS= -lm  -ldl
@@ -355,5 +354,5 @@ MKDLL=gcc --shared
 TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL=gcc --shared
+MKMAINDLL=gcc -Wall --shared
 TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
