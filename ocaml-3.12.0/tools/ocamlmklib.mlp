@@ -35,7 +35,7 @@ and ocamlopt = ref (compiler_path "ocamlopt")
 and output = ref "a"        (* Output name for Caml part of library *)
 and output_c = ref ""       (* Output name for C part of library *)
 and rpath = ref []          (* rpath options *)
-and verbose = ref false
+and verbose = ref true
 
 let starts_with s pref =
   String.length s >= String.length pref &&
