@@ -89,7 +89,7 @@ let load = ref ([] : string list)
 (** Allow arbitrary recursive types. *)
 let recursive_types = Clflags.recursive_types
 
-let verbose = ref false
+let verbose = ref true
 
 (** Optional preprocessor command. *)
 let preprocessor = Clflags.preprocessor
