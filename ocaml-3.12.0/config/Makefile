@@ -286,7 +286,8 @@ PACKLD=$(PARTIALLD) $(NATIVECCLINKOPTS) -o
 #       bigarray        Large, multidimensional numerical arrays
 
 #OTHERLIBRARIES=unix str num threads graph dynlink labltk bigarray
-OTHERLIBRARIES=unix str num dynlink bigarray systhreads threads dbm
+#OTHERLIBRARIES=unix str num dynlink bigarray systhreads threads dbm
+OTHERLIBRARIES=unix str num dynlink bigarray systhreads threads
 
 ### Name of the target architecture for the "num" library
 # Known targets:
