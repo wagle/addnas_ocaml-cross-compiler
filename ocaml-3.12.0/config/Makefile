@@ -112,13 +112,6 @@ CCLIBS=-lcurses -ltermcap -lm
 # Under FreeBSD:
 #CPP=cpp -P
 
-SYSLIB=-l$(1)
-#ml let syslib x = "-l"^x;;
-
-### How to build a static library
-MKLIB=$(TARGETAR) rc \$(1) \$(2); $(TARGETRANLIB) \$(1)
-#ml let mklib out files opts = Printf.sprintf "arm-none-linux-gnueabi-ar rc %s %s %s; arm-none-linux-gnueabi-ranlib %s" out opts files out;;
-
 ### How to invoke ranlib (for a 'local' library)
 # BSD-style:
 RANLIB=ranlib
@@ -137,6 +130,13 @@ TARGETRANLIBCMD=arm-none-linux-gnueabi-ranlib
 
 ### How to invoke ar (for a 'target' library)
 TARGETAR=arm-none-linux-gnueabi-ar
+
+SYSLIB=-l$(1)
+#ml let syslib x = "-l"^x;;
+
+### How to build a static library
+MKLIB=$(TARGETAR) rc \$(1) \$(2); $(TARGETRANLIB) \$(1)
+#ml let mklib out files opts = Printf.sprintf "arm-none-linux-gnueabi-ar rc %s %s %s; arm-none-linux-gnueabi-ranlib %s" out opts files out;;
 
 ### Shared library support
 # Extension for shared libraries: so if supported, a if not supported
