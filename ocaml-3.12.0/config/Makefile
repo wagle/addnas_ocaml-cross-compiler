@@ -35,7 +35,6 @@ NATDYNLINKOPTS=-Wl,-E
 DYNLINKOPTS= -ldl
 DEBUGGER=ocamldebugger
 
-PACKLD=$(PARTIALLD) $(NATIVECCLINKOPTS) -o
 DLLCCCOMPOPTS=
 IFLEXDIR=
 A=a
@@ -270,6 +269,8 @@ CC_PROFILE=-pg
 
 ### How to perform a partial link
 PARTIALLD=arm-none-linux-gnueabi-ld -r $(NATIVECCLINKOPTS)
+
+PACKLD=$(PARTIALLD) $(NATIVECCLINKOPTS) -o
 
 ############# Configuration for the contributed libraries
 
