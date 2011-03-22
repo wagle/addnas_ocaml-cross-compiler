@@ -121,7 +121,7 @@ CUSTOM_IF_NOT_SHARED=
 SHAREDCCCOMPOPTS=-fPIC
 # How to build a shared library, invoked with output .so as first arg
 # and object files as remaining args
-MKSHAREDLIB="arm-none-linux-gnueabi-gcc -march=armv6 -shared -o"
+MKSHAREDLIB=arm-none-linux-gnueabi-gcc -march=armv6 -shared -o
 # Compile-time option to $(BYTECC) to add a directory to be searched
 # at run-time for shared libraries
 BYTECCRPATH=-Wl,-rpath
@@ -188,7 +188,7 @@ SYSTEM=linux_elf
 ### cc is better than gcc on the Mips and Alpha.
 #NATIVECC=cc
 #NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
-NATIVECC="arm-none-linux-gnueabi-gcc -march=armv6"
+NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Additional compile-time options for $(NATIVECC).
 # For cc on the Alpha:
@@ -310,13 +310,13 @@ DBM_INCLUDES=-I/usr/include/gdbm
 #TK_LINK="-L/usr/local/lib -ltk8.0 -ltcl8.0"
 
 ### Compilers for producing executables ('local' and 'target' ones)
-MKEXE="arm-none-linux-gnueabi-gcc -march=armv6"
-TARGETMKEXE="arm-none-linux-gnueabi-gcc -march=armv6"
+MKEXE=arm-none-linux-gnueabi-gcc -march=armv6
+TARGETMKEXE=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKDLL="arm-none-linux-gnueabi-gcc -march=armv6"
-TARGETMKDLL="arm-none-linux-gnueabi-gcc -march=armv6"
+MKDLL=arm-none-linux-gnueabi-gcc -march=armv6
+TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL="arm-none-linux-gnueabi-gcc -march=armv6"
-TARGETMKMAINDLL="arm-none-linux-gnueabi-gcc -march=armv6"
+MKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6
+TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6
