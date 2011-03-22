@@ -310,13 +310,13 @@ DBM_INCLUDES=-I/usr/include/gdbm
 #TK_LINK="-L/usr/local/lib -ltk8.0 -ltcl8.0"
 
 ### Compilers for producing executables ('local' and 'target' ones)
-MKEXE=arm-none-linux-gnueabi-gcc -march=armv6
+MKEXE=gcc
 TARGETMKEXE=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKDLL=arm-none-linux-gnueabi-gcc -march=armv6
+MKDLL=gcc
 TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6
+MKMAINDLL=gcc
 TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6
