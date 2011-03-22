@@ -216,7 +216,7 @@ SYSTEM=linux_elf
 ### cc is better than gcc on the Mips and Alpha.
 #NATIVECC=cc
 #NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
-NATIVECC=gcc -Wall
+NATIVECC=arm-none-linux-gnueabi-gcc -Wall
 
 NATIVECCLINKOPTS=
 NATIVECCLIBS= -lm  -ldl
