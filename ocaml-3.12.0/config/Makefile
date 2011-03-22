@@ -314,9 +314,9 @@ MKEXE=gcc -Wall
 TARGETMKEXE=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKDLL=gcc -Wall
+MKDLL=gcc --shared
 TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL=gcc -Wall
+MKMAINDLL=gcc --shared
 TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6
