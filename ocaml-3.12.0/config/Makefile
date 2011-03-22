@@ -356,5 +356,5 @@ MKDLL=arm-none-linux-gnueabi-gcc --shared
 TARGETMKDLL=arm-none-linux-gnueabi-gcc --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL=gcc -Wall --shared
+MKMAINDLL=arm-none-linux-gnueabi-gcc -Wall --shared
 TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc --shared
