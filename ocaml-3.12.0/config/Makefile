@@ -350,7 +350,8 @@ MKEXE=$(BYTECC)
 TARGETMKEXE=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKDLL=gcc --shared
+#MKDLL=gcc --shared
+MKDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
 TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
