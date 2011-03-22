@@ -149,7 +149,7 @@ CUSTOM_IF_NOT_SHARED=
 SHAREDCCCOMPOPTS=-fPIC
 # How to build a shared library, invoked with output .so as first arg
 # and object files as remaining args
-MKSHAREDLIB=arm-none-linux-gnueabi-gcc -march=armv6 -shared -o
+MKSHAREDLIB=arm-none-linux-gnueabi-gcc -shared -o
 # Compile-time option to $(BYTECC) to add a directory to be searched
 # at run-time for shared libraries
 BYTECCRPATH=-Wl,-rpath,
@@ -215,7 +215,7 @@ SYSTEM=linux_elf
 ### Which C compiler to use for the native-code compiler.
 ### cc is better than gcc on the Mips and Alpha.
 #NATIVECC=cc
-NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
+NATIVECC=arm-none-linux-gnueabi-gcc
 
 NATIVECCLINKOPTS=
 NATIVECCLIBS= -lm  -ldl
@@ -242,11 +242,11 @@ NATIVECCRPATH=-Wl,-rpath,
 # For the PowerPC:
 #AS=as -u -m ppc -w
 # Otherwise:
-ASM=arm-none-linux-gnueabi-as -march=armv6
+ASM=arm-none-linux-gnueabi-as
 
 ### Command and flags to use for assembling .S files (often with preprocessing)
 # If gcc is available:
-ASPP=arm-none-linux-gnueabi-gcc -c -march=armv6
+ASPP=arm-none-linux-gnueabi-gcc -c
 # On SunOS and Solaris:
 #ASPP=as -P
 
@@ -348,13 +348,13 @@ DBM_LINK=-lgdbm
 ### Compilers for producing executables ('local' and 'target' ones)
 MKEXE=$(BYTECC)
 #MKEXE=gcc -Wall
-TARGETMKEXE=arm-none-linux-gnueabi-gcc -march=armv6
+TARGETMKEXE=arm-none-linux-gnueabi-gcc
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 #MKDLL=gcc --shared
-MKDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
-TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
+MKDLL=arm-none-linux-gnueabi-gcc --shared
+TARGETMKDLL=arm-none-linux-gnueabi-gcc --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 MKMAINDLL=gcc -Wall --shared
-TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
+TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc --shared
