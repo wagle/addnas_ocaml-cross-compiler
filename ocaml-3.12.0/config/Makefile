@@ -23,6 +23,8 @@ EXT_DLL=.so
 MKSHAREDLIBRPATH=
 EXT_LIB=.a
 CMXS=cmxa
+O=o
+SO=so
 ### end TSIDIRECT
 
 ########## General configuration
