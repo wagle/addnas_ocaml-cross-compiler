@@ -16,30 +16,53 @@
 ### Compile-time configuration
 
 ### begin TSIDIRECT
-ROOTPATH=/opt/ocaml-cross-arm
+PREFIX=/opt/ocaml-cross-arm
 SYSTHREAD_SUPPORT=false
+#SYSTHREAD_SUPPORT=true
 SUPPORTS_SHARED_LIBRARIES=true
-EXT_DLL=.so
-MKSHAREDLIBRPATH=
-EXT_LIB=.a
-CMXS=cmxa
 O=o
-SO=so
+X11_INCLUDES=
+X11_LINK=
+TK_DEFS=
+TK_LINK=
+LIBBFD_LINK=
+BYTECCLIBS= -lm  -ldl -lcurses -lpthread
+EXE=
+MKSHAREDLIBRPATH=-Wl,-rpath,
+NATDYNLINKOPTS=-Wl,-E
+#SYSTEM=linux
+
+DYNLINKOPTS= -ldl
+DEBUGGER=ocamldebugger
+
+PACKLD=$(PARTIALLD) $(NATIVECCLINKOPTS) -o\
+DLLCCCOMPOPTS=
+IFLEXDIR=
+A=a
+EXT_OBJ=.o
+EXT_ASM=.s
+EXT_LIB=.a
+EXT_DLL=.so
+EXTRALIBS=
+CCOMPTYPE=cc
+TOOLCHAIN=cc
+NATDYNLINK=true
+CMXS=cmxs
 ### end TSIDIRECT
 
 ########## General configuration
 
 ### Where to install the binaries
-BINDIR=$(ROOTPATH)/bin
+BINDIR=$(PREFIX)/bin
 
 ### Where to install the standard library
-LIBDIR=$(ROOTPATH)/lib/ocaml
+LIBDIR=$(PREFIX)/lib/ocaml
 STUBLIBDIR=$(LIBDIR)/stublibs
 
 ### Where to install the man pages
 # Man pages for commands go in $(MANDIR)/man$(MANEXT)
 # Man pages for the library go in $(MANDIR)/mano
-MANDIR=$(ROOTPATH)/man
+MANDIR=$(PREFIX)/man
 MANEXT=1
 
 ### Do #! scripts work on your system?
@@ -73,9 +96,9 @@ BYTECCCOMPOPTS=
 #BYTECCLINKOPTS=-Wl,-T,12000000 -Wl,-D,14000000
 # To support dynamic loading of shared libraries (they need to look at
 # our own symbols):
-#BYTECCLINKOPTS=-Wl,-E
+BYTECCLINKOPTS=-Wl,-E
 # Otherwise:
-BYTECCLINKOPTS=
+#BYTECCLINKOPTS=
 
 ### Libraries needed
 # On most platforms:
@@ -90,8 +113,11 @@ CCLIBS=-lcurses -ltermcap -lm
 # Under FreeBSD:
 #CPP=cpp -P
 
-MKLIB=$(TARGETAR) rc \$(1) \$(2); $(TARGETRANLIB) \$(1)
+SYSLIB=-l$(1)
 #ml let syslib x = "-l"^x;;
+
+### How to build a static library
+MKLIB=$(TARGETAR) rc \$(1) \$(2); $(TARGETRANLIB) \$(1)
 #ml let mklib out files opts = Printf.sprintf "arm-none-linux-gnueabi-ar rc %s %s %s; arm-none-linux-gnueabi-ranlib %s" out opts files out;;
 
 ### How to invoke ranlib (for a 'local' library)
@@ -127,7 +153,7 @@ SHAREDCCCOMPOPTS=-fPIC
 MKSHAREDLIB=arm-none-linux-gnueabi-gcc -march=armv6 -shared -o
 # Compile-time option to $(BYTECC) to add a directory to be searched
 # at run-time for shared libraries
-BYTECCRPATH=-Wl,-rpath
+BYTECCRPATH=-Wl,-rpath,
 
 ############# Configuration for the native-code compiler
 
@@ -193,6 +219,9 @@ SYSTEM=linux_elf
 #NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
 NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
 
+NATIVECCLINKOPTS=
+NATIVECCLIBS= -lm  -ldl
+
 ### Additional compile-time options for $(NATIVECC).
 # For cc on the Alpha:
 #NATIVECCCOMPOPTS=-std1
@@ -200,13 +229,14 @@ NATIVECC=arm-none-linux-gnueabi-gcc -march=armv6
 #NATIVECCCOMPOPTS=-std
 # For gcc if superstitious:
 #NATIVECCCOMPOPTS=-Wall
+NATIVECCCOMPOPTS=-Wall -D_FILE_OFFSET_BITS=64 -D_REENTRANT
 
 ### Additional link-time options for $(NATIVECC)
-NATIVECCLINKOPTS=
+NATIVECCPROFOPTS=-Wall -D_FILE_OFFSET_BITS=64 -D_REENTRANT
 
 # Compile-time option to $(NATIVECC) to add a directory to be searched
 # at run-time for shared libraries
-NATIVECCRPATH=-Wl,-rpath
+NATIVECCRPATH=-Wl,-rpath,
 
 ### Command and flags to use for assembling ocamlopt-generated code
 # For the Alpha or the Mips:
@@ -226,7 +256,7 @@ ASPP=arm-none-linux-gnueabi-gcc -c -march=armv6
 # On Digital Unix:
 #ASPPPROFFLAGS=-pg -DPROFILING
 # Otherwise:
-#ASPPPROFFLAGS=-DPROFILING
+ASPPPROFFLAGS=-DPROFILING
 
 ### Whether profiling with gprof is supported
 # If yes: (x86/Linux, Alpha/Digital Unix, Sparc/Solaris):
@@ -235,7 +265,7 @@ ASPP=arm-none-linux-gnueabi-gcc -c -march=armv6
 PROFILING=noprof
 
 ### Option to give to the C compiler for profiling
-#CC_PROFILE=-pg
+CC_PROFILE=-pg
 #CC_PROFILE=-xpg
 
 ### How to perform a partial link
@@ -255,7 +285,8 @@ PARTIALLD=arm-none-linux-gnueabi-ld -r $(NATIVECCLINKOPTS)
 #       labltk          Tcl/Tk interface
 #       bigarray        Large, multidimensional numerical arrays
 
-OTHERLIBRARIES=unix str num threads graph dynlink labltk bigarray
+#OTHERLIBRARIES=unix str num threads graph dynlink labltk bigarray
+OTHERLIBRARIES=unix str num dynlink bigarray systhreads threads dbm
 
 ### Name of the target architecture for the "num" library
 # Known targets:
@@ -281,14 +312,14 @@ PTHREAD_LINK=-cclib -lpthread
 ### -I options for finding the X11/*.h includes
 # Needed for the "graph" and "labltk" packages
 # Usually:
-X11_INCLUDES=-I/usr/X11R6/include
+#X11_INCLUDES=-I/usr/X11R6/include
 # For SunOS with OpenLook:
 #X11_INCLUDES=/usr/openwin/include
 
 ### Link-time options to ocamlc or ocamlopt for linking with X11 libraries
 # Needed for the "graph" and "labltk" packages
 # Usually:
-X11_LINK=-lX11
+#X11_LINK=-lX11
 # For SunOS with OpenLook:
 #X11_LINK=-L$(X11_LIB) -lX11
 
@@ -298,6 +329,7 @@ X11_LINK=-lX11
 #DBM_INCLUDES=
 # For recent Linux systems:
 DBM_INCLUDES=-I/usr/include/gdbm
+DBM_LINK=-lgdbm
 
 ### Preprocessor options for finding tcl.h and tk.h
 # Needed for the "labltk" package
@@ -313,13 +345,14 @@ DBM_INCLUDES=-I/usr/include/gdbm
 #TK_LINK="-L/usr/local/lib -ltk8.0 -ltcl8.0"
 
 ### Compilers for producing executables ('local' and 'target' ones)
-MKEXE=gcc -Wall
+MKEXE=$(BYTECC)
+#MKEXE=gcc -Wall
 TARGETMKEXE=arm-none-linux-gnueabi-gcc -march=armv6
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 MKDLL=gcc --shared
-TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6
+TARGETMKDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 MKMAINDLL=gcc --shared
-TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6
+TARGETMKMAINDLL=arm-none-linux-gnueabi-gcc -march=armv6 --shared
