@@ -15,7 +15,7 @@
 
 ### Compile-time configuration
 
-### begin TSIDIRECT
+### begin WAGLE
 PREFIX=/opt/ocaml-cross-arm
 SYSTHREAD_SUPPORT=false
 #SYSTHREAD_SUPPORT=true
@@ -50,7 +50,7 @@ CMXS=cmxs
 #XGCC=arm-none-linux-gnueabi-
 XXX=/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-
 
-### end TSIDIRECT
+### end WAGLE
 
 ########## General configuration
 
