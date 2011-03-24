@@ -210,10 +210,10 @@ MODEL=default
 #SYSTEM=sunos
 #SYSTEM=solaris
 #SYSTEM=linux
-SYSTEM=linux_elf
+#SYSTEM=linux_elf
 #SYSTEM=bsd
 #SYSTEM=nextstep
-#SYSTEM=unknown
+SYSTEM=unknown
 
 ### Which C compiler to use for the native-code compiler.
 ### cc is better than gcc on the Mips and Alpha.
