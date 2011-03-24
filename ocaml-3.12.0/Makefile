@@ -261,6 +261,16 @@ opt:
 	$(MAKE) otherlibrariesopt
 	$(MAKE) ocamlbuildlib.native
 
+# Native-code versions of the tools
+opt.opt: checkstack runtime core ocaml opt-core ocamlc.opt otherlibraries \
+	 ocamlbuild.byte camlp4out $(DEBUGGER) ocamldoc ocamlopt.opt \
+	 otherlibrariesopt \
+	 ocamllex.opt ocamltoolsopt.opt ocamlbuild.native camlp4opt ocamldoc.opt
+
+base.opt: checkstack runtime core ocaml opt-core ocamlc.opt otherlibraries \
+	 ocamlbuild.byte camlp4out $(DEBUGGER) ocamldoc ocamlopt.opt \
+	 otherlibrariesopt
+
 # Compile the cross-compiler
 cross:
 	cd boot && cp `which ocamlrun` .
@@ -276,16 +286,6 @@ cross:
 	$(MAKE) ocamlopt
 	$(MAKE) libraryopt
 	$(MAKE) otherlibrariesopt
-
-# Native-code versions of the tools
-opt.opt: checkstack runtime core ocaml opt-core ocamlc.opt otherlibraries \
-	 ocamlbuild.byte camlp4out $(DEBUGGER) ocamldoc ocamlopt.opt \
-	 otherlibrariesopt \
-	 ocamllex.opt ocamltoolsopt.opt ocamlbuild.native camlp4opt ocamldoc.opt
-
-base.opt: checkstack runtime core ocaml opt-core ocamlc.opt otherlibraries \
-	 ocamlbuild.byte camlp4out $(DEBUGGER) ocamldoc ocamlopt.opt \
-	 otherlibrariesopt
 
 # Installation
 install:
