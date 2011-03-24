@@ -33,7 +33,7 @@ libthreads.a: $(BYTECODE_C_OBJS)
 	$(MKLIB) -o threads $(BYTECODE_C_OBJS)
 
 st_stubs_b.o: st_stubs.c st_posix.h
-	$(BYTECC) -O -I../../byterun $(BYTECCCOMPOPTS) $(SHAREDCCCOMPOPTS) \
+	$(NATIVECC) -O -I../../byterun $(NATIVECCCOMPOPTS) $(SHAREDCCCOMPOPTS) \
 	   -c st_stubs.c
 	mv st_stubs.o st_stubs_b.o
 
