@@ -353,10 +353,9 @@ MKEXE=$(BYTECC)
 TARGETMKEXE=$(XXX)gcc
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-#MKDLL=gcc --shared
-MKDLL=$(XXX)gcc --shared
+MKDLL=gcc --shared
 TARGETMKDLL=$(XXX)gcc --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL=$(XXX)gcc -Wall --shared
+MKMAINDLL=gcc --shared
 TARGETMKMAINDLL=$(XXX)gcc --shared
