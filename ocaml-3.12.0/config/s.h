@@ -15,6 +15,19 @@
 
 /* Operating system and standard library dependencies. */
 
+/* begin WAGLE */
+#define OCAML_STDLIB_DIR "/usr/local/lib/ocaml"
+#define HAS_GETRUSAGE
+#define HAS_TIMES
+#define HAS_SOCKETS
+#define HAS_SOCKLEN_T
+#define HAS_INET_ATON
+#define HAS_IPV6
+#define HAS_OFF_T
+#define HAS_STACK_OVERFLOW_DETECTION
+#define HAS_SIGWAIT
+/* end WAGLE */
+
 /* 0. Operating system type string. */
 
 #define OCAML_OS_TYPE "Unix"
