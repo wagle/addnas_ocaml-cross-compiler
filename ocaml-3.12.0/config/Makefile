@@ -349,7 +349,8 @@ DBM_LINK=-lgdbm
 #TK_LINK="-L/usr/local/lib -ltk8.0 -ltcl8.0"
 
 ### Compilers for producing executables ('local' and 'target' ones)
-MKEXE=$(BYTECC)
+#MKEXE=$(BYTECC)
+MKEXE=$(XXX)gcc
 #MKEXE=gcc -Wall
 TARGETMKEXE=$(XXX)gcc
 
