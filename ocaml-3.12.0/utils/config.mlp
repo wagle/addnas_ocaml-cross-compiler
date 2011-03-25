@@ -49,7 +49,7 @@ let cc_profile = "%%CC_PROFILE%%"
 let mkdll = "%%MKDLL%%"
 let mkexe = "%%MKEXE%%"
 let mkmaindll = "%%MKMAINDLL%%"
-let target_mkdll = "%%TARGETMKDLL%%"
+let targetmkdll = "%%TARGETMKDLL%%"
 let target_mkexe = "%%TARGETMKEXE%%"
 let target_mkmaindll = "%%TARGETMKMAINDLL%%"
 

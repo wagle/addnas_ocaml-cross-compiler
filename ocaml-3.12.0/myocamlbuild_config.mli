@@ -45,7 +45,7 @@ val systhread_support : bool
 val syslib : string -> string
 val mkexe : string
 val mkdll : string
-val target_mkdll : string
+val targetmkdll : string
 val mkmaindll : string
 val mklib : string -> string -> string -> string
 val ext_lib : string

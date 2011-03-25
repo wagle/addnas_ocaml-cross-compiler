@@ -57,7 +57,7 @@ let native_pack_linker = C.packld
 let ranlib = C.ranlibcmd
 let cc_profile = C.cc_profile
 let mkdll = C.mkdll
-let target_mkdll = C.target_mkdll
+let targetmkdll = C.targetmkdll
 let mkexe = C.mkexe
 let mkmaindll = C.mkmaindll
 
