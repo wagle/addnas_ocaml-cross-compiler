@@ -79,7 +79,7 @@ SHARPBANGSCRIPTS=true
 ### Which C compiler to use for the bytecode interpreter.
 ### Performance of the bytecode interpreter is *much* improved
 ### if Gnu CC version 2 is used.
-BYTECC=gcc
+BYTECC=gcc -m32
 #BYTECC=cc
 
 ### Additional compile-time options for $(BYTECC).
@@ -353,9 +353,9 @@ MKEXE=$(BYTECC)
 TARGETMKEXE=$(XXX)gcc
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKDLL=gcc --shared
+MKDLL=gcc -m32 --shared
 TARGETMKDLL=$(XXX)gcc --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
-MKMAINDLL=gcc --shared
+MKMAINDLL=gcc -m32 --shared
 TARGETMKMAINDLL=$(XXX)gcc --shared
