@@ -125,20 +125,20 @@ RANLIBCMD=ranlib
 
 ### How to invoke ranlib (for a 'target' library)
 # BSD-style:
-TARGETRANLIB=$(XXX)ranlib
-TARGETRANLIBCMD=$(XXX)ranlib
+TARGET_RANLIB=$(XXX)ranlib
+TARGET_RANLIBCMD=$(XXX)ranlib
 # If ranlib is not needed:
-#TARGETRANLIB=ar rs
-#TARGETRANLIBCMD=
+#TARGET_RANLIB=ar rs
+#TARGET_RANLIBCMD=
 
 ### How to invoke ar (for a 'target' library)
-TARGETAR=$(XXX)ar
+TARGET_AR=$(XXX)ar
 
 SYSLIB=-l$(1)
 #ml let syslib x = "-l"^x;;
 
 ### How to build a static library
-MKLIB=$(TARGETAR) rc \$(1) \$(2); $(TARGETRANLIB) \$(1)
+MKLIB=$(TARGET_AR) rc \$(1) \$(2); $(TARGET_RANLIB) \$(1)
 #ml let mklib out files opts = Printf.sprintf "/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ar rc %s %s %s; /root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ranlib %s" out opts files out;;
 
 ### Shared library support
@@ -350,12 +350,12 @@ DBM_LINK=-lgdbm
 
 ### Compilers for producing executables ('local' and 'target' ones)
 MKEXE=$(BYTECC)
-TARGETMKEXE=$(XXX)gcc
+TARGET_MKEXE=$(XXX)gcc
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 MKDLL=gcc -m32 --shared
-TARGETMKDLL=$(XXX)gcc --shared
+TARGET_MKDLL=$(XXX)gcc --shared
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 MKMAINDLL=gcc -m32 --shared
-TARGETMKMAINDLL=$(XXX)gcc --shared
+TARGET_MKMAINDLL=$(XXX)gcc --shared

@@ -115,7 +115,7 @@ let call_linker target mode output_name files extra =
         | None, Dll, false -> Config.mkdll
         | None, MainDll, false -> Config.mkmaindll
         | None, Exe, true -> Config.target_mkexe
-        | None, Dll, true -> Config.targetmkdll
+        | None, Dll, true -> Config.target_mkdll
         | None, MainDll, true -> Config.target_mkmaindll
         | None, Partial, _ -> assert false
         )

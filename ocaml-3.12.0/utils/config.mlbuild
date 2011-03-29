@@ -57,9 +57,11 @@ let native_pack_linker = C.packld
 let ranlib = C.ranlibcmd
 let cc_profile = C.cc_profile
 let mkdll = C.mkdll
-let targetmkdll = C.targetmkdll
+let target_mkdll = C.target_mkdll
 let mkexe = C.mkexe
+let target_mkexe = C.target_mkexe
 let mkmaindll = C.mkmaindll
+let target_mkmaindll = C.target_mkmaindll
 
 let exec_magic_number = "Caml1999X008"
 and cmi_magic_number = "Caml1999I012"

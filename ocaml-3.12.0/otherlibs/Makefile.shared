@@ -66,8 +66,8 @@ install::
 
 installopt:
 	cp $(CAMLOBJS_NAT) $(LIBNAME).cmxa $(LIBNAME).$(A) $(CMIFILES) $(CMIFILES:.cmi=.mli) lib$(CLIBNAME).$(A) $(LIBDIR)/
-	cd $(LIBDIR); $(TARGETRANLIB) $(LIBNAME).a
-	cd $(LIBDIR); $(TARGETRANLIB) lib$(CLIBNAME).$(A)
+	cd $(LIBDIR); $(TARGET_RANLIB) $(LIBNAME).a
+	cd $(LIBDIR); $(TARGET_RANLIB) lib$(CLIBNAME).$(A)
 	if test -f $(LIBNAME).cmxs; then cp $(LIBNAME).cmxs $(LIBDIR)/; fi
 
 partialclean:

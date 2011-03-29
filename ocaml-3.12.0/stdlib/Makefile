@@ -27,7 +27,7 @@ installopt: installopt-default installopt-$(PROFILING)
 
 installopt-default:
 	cp stdlib.cmxa stdlib.a std_exit.o *.cmx $(LIBDIR)
-	cd $(LIBDIR); $(TARGETRANLIB) stdlib.a
+	cd $(LIBDIR); $(TARGET_RANLIB) stdlib.a
 
 installopt-noprof:
 	rm -f $(LIBDIR)/stdlib.p.cmxa; ln -s stdlib.cmxa $(LIBDIR)/stdlib.p.cmxa
@@ -38,7 +38,7 @@ installopt-noprof:
 
 installopt-prof:
 	cp stdlib.p.cmxa stdlib.p.a std_exit.p.cmx std_exit.p.o $(LIBDIR)
-	cd $(LIBDIR); $(TARGETRANLIB) stdlib.p.a
+	cd $(LIBDIR); $(TARGET_RANLIB) stdlib.p.a
 
 stdlib.p.cmxa: $(OBJS:.cmo=.p.cmx)
 	$(CAMLOPT) -a -o stdlib.p.cmxa $(OBJS:.cmo=.p.cmx)

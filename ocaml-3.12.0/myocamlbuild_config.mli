@@ -44,9 +44,11 @@ val cc_profile : string
 val systhread_support : bool
 val syslib : string -> string
 val mkexe : string
+val target_mkexe : string
 val mkdll : string
-val targetmkdll : string
+val target_mkdll : string
 val mkmaindll : string
+val target_mkmaindll : string
 val mklib : string -> string -> string -> string
 val ext_lib : string
 val ext_obj : string

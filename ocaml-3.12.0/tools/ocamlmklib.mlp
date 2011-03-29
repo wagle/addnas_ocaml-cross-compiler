@@ -223,7 +223,7 @@ let build_libs () =
     if !dynlink then begin
       let retcode = command
           (Printf.sprintf "%s -o %s %s %s %s %s %s"
-             targetmkdll
+             target_mkdll
              (prepostfix "dll" !output_c ext_dll)
              (String.concat " " !c_objs)
              (String.concat " " !c_opts)

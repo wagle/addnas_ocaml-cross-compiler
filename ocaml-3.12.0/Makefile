@@ -410,7 +410,7 @@ utils/config.ml: utils/config.mlp config/Makefile
 	    -e 's|%%BYTECCLIBS%%|$(BYTECCLIBS)|' \
 	    -e 's|%%NATIVECCLIBS%%|$(NATIVECCLIBS)|' \
 	    -e 's|%%RANLIBCMD%%|$(RANLIBCMD)|' \
-            -e 's|%%TARGETRANLIBCMD%%|$(TARGETRANLIBCMD)|' \
+            -e 's|%%TARGET_RANLIBCMD%%|$(TARGET_RANLIBCMD)|' \
 	    -e 's|%%CC_PROFILE%%|$(CC_PROFILE)|' \
 	    -e 's|%%ARCH%%|$(ARCH)|' \
 	    -e 's|%%MODEL%%|$(MODEL)|' \
@@ -424,9 +424,9 @@ utils/config.ml: utils/config.mlp config/Makefile
 	    -e 's|%%MKDLL%%|$(MKDLL)|' \
 	    -e 's|%%MKEXE%%|$(MKEXE)|' \
 	    -e 's|%%MKMAINDLL%%|$(MKMAINDLL)|' \
-            -e 's|%%TARGETMKDLL%%|$(TARGETMKDLL)|' \
-            -e 's|%%TARGETMKEXE%%|$(TARGETMKEXE)|' \
-            -e 's|%%TARGETMKMAINDLL%%|$(TARGETMKMAINDLL)|' \
+            -e 's|%%TARGET_MKDLL%%|$(TARGET_MKDLL)|' \
+            -e 's|%%TARGET_MKEXE%%|$(TARGET_MKEXE)|' \
+            -e 's|%%TARGET_MKMAINDLL%%|$(TARGET_MKMAINDLL)|' \
 	    utils/config.mlp > utils/config.ml
 	@chmod -w utils/config.ml
 

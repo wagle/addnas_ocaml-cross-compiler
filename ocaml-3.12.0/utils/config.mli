@@ -47,7 +47,7 @@ val mkmaindll: string
         (* The linker command line to build main programs as dlls. *)
 val ranlib: string
         (* Command to randomize a library, or "" if not needed *)
-val targetmkdll: string
+val target_mkdll: string
         (* The linker command line to build dynamic libraries (for 'target' platform). *)
 val target_mkexe: string
         (* The linker command line to build executables (for 'target' platform). *)

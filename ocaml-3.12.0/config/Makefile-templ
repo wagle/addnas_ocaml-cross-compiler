@@ -92,14 +92,14 @@ RANLIBCMD=ranlib
 
 ### How to invoke ranlib (for a 'target' library)
 # BSD-style:
-#TARGETRANLIB=ranlib
-#TARGETRANLIBCMD=ranlib
+#TARGET_RANLIB=ranlib
+#TARGET_RANLIBCMD=ranlib
 # If ranlib is not needed:
-#TARGETRANLIB=ar rs
-#TARGETRANLIBCMD=
+#TARGET_RANLIB=ar rs
+#TARGET_RANLIBCMD=
 
 ### How to invoke ar (for a 'target' library)
-#TARGETAR=
+#TARGET_AR=
 
 ### Shared library support
 # Extension for shared libraries: so if supported, a if not supported
@@ -301,12 +301,12 @@ BNG_ASM_LEVEL=1
 
 ### Compilers for producing executables ('local' and 'target' ones)
 #MKEXE=
-#TARGETMKEXE=
+#TARGET_MKEXE=
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 #MKDLL=
-#TARGETMKDLL=
+#TARGET_MKDLL=
 
 ### Compilers for producing dlls ('local' and 'target' ones)
 #MKMAINDLL=
-#TARGETMKMAINDLL=
+#TARGET_MKMAINDLL=
