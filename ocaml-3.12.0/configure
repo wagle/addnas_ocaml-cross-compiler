@@ -16,13 +16,13 @@
 # $Id: configure 10636 2010-07-28 13:18:22Z doligez $
 
 configure_options="$*"
-prefix=/opt/cross/arm
+prefix=/opt/wagle
 bindir=''
 libdir=''
 mandir=''
 manext=1
 host_type=arm-linux
-cross=arm-linux-gnueabi-
+cross=arm-linux-uclibcgnueabi-
 ccoption=''
 asoption=''
 asppoption=''
