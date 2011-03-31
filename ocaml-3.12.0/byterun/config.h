@@ -32,12 +32,17 @@
 
 typedef signed char schar;
 
-#if SIZEOF_PTR == SIZEOF_LONG && sizeof(long) == SIZEOF_LONG
+#if SIZEOF_PTR == SIZEOF_INT
+/* Hypothetical IP32L64 model */
+typedef int intnat;
+typedef unsigned int uintnat;
+#define ARCH_INTNAT_PRINTF_FORMAT ""
+#elif SIZEOF_PTR == SIZEOF_LONG
 /* Standard models: ILP32 or I32LP64 */
 typedef long intnat;
 typedef unsigned long uintnat;
 #define ARCH_INTNAT_PRINTF_FORMAT "l"
-#elif SIZEOF_PTR == SIZEOF_INT && sizeof(int) == SIZEOF_INT
+#elif SIZEOF_PTR == SIZEOF_INT
 /* Hypothetical IP32L64 model */
 typedef int intnat;
 typedef unsigned int uintnat;
