@@ -17,17 +17,18 @@
 include config/Makefile
 include stdlib/StdlibModules
 
-CAMLC=boot/ocamlrun boot/ocamlc -nostdlib -I boot
-CAMLOPT=boot/ocamlrun ./ocamlopt -nostdlib -I stdlib -I otherlibs/dynlink
+CROSSCC=$(CROSS)$(BYTECC)
+CAMLC=ocamlc.opt -nostdlib -I stdlib
+CAMLOPT=ocamlrun ./ocamlopt -nostdlib -I stdlib -I otherlibs/dynlink
 COMPFLAGS=-strict-sequence -warn-error A $(INCLUDES)
 LINKFLAGS=
 
-CAMLYACC=boot/ocamlyacc
+CAMLYACC=ocamlyacc
 YACCFLAGS=-v
-CAMLLEX=boot/ocamlrun boot/ocamllex
-CAMLDEP=boot/ocamlrun tools/ocamldep
+CAMLLEX=ocamllex
+CAMLDEP=ocamldep
 DEPFLAGS=$(INCLUDES)
-CAMLRUN=byterun/ocamlrun
+CAMLRUN=ocamlrun
 SHELL=/bin/sh
 MKDIR=mkdir -p
 
@@ -271,6 +272,38 @@ base.opt: checkstack runtime core ocaml opt-core ocamlc.opt otherlibraries \
 	 ocamlbuild.byte camlp4out $(DEBUGGER) ocamldoc ocamlopt.opt \
 	 otherlibrariesopt
 
+# Native-code cross-compiler, libraries, and tools
+
+cross: cross-start cross-ocamlc.opt runtimeopt ocamlopt \
+       cross-ocamlopt.opt libraryopt otherlibrariesopt
+
+cross-start:
+	cd tools; $(MAKE) CAMLC=ocamlc.opt ocamlmklib
+	cd stdlib; $(MAKE) RUNTIME= COMPILER=$$(which ocamlc.opt) all
+	@sed -e 's|@compiler@|ocamlc.opt|' \
+	  driver/ocamlcomp.sh.in > ocamlcomp.sh
+	@chmod +x ocamlcomp.sh
+
+cross-ocamlc.opt:
+	$(MAKE) NATIVECC="$(BYTECC)" CAMLC=ocamlc.opt CAMLOPT=ocamlopt.opt ocamlc.opt
+	rm -f asmrun/meta.o asmrun/dynlink.o
+	@sed -e 's|@compiler@|$$topdir/ocamlc.opt|' \
+	  driver/ocamlcomp.sh.in > ocamlcomp.sh
+	@chmod +x ocamlcomp.sh
+
+cross-ocamlopt.opt:
+	@sed -e 's|@compiler@|ocamlopt.opt -nopervasives|' \
+	  driver/ocamlcomp.sh.in > ocamlcomp.sh
+	@chmod +x ocamlcomp.sh
+	$(MAKE) CAMLC=ocamlc.opt CAMLOPT=ocamlopt.opt ocamlopt.opt
+	rm -f $(OPTOBJS:.cmo=.cmx)
+	@sed -e 's|@compiler@|ocamlc.opt|' \
+	  driver/ocamlcomp.sh.in > ocamlcomp.sh
+	@chmod +x ocamlcomp.sh
+	@sed -e 's|@compiler@|$$topdir/ocamlopt.opt|' \
+	  driver/ocamlcomp.sh.in > ocamlcompopt.sh
+	@chmod +x ocamlcompopt.sh
+
 # Installation
 install:
 	if test -d $(BINDIR); then : ; else $(MKDIR) $(BINDIR); fi
@@ -321,12 +354,24 @@ installopt:
 	if test -f lex/ocamllex.opt; \
 	  then cp lex/ocamllex.opt $(BINDIR)/ocamllex.opt$(EXE); else :; fi
 
+# Installation of the cross-compiler
+installcross:
+	if test -d $(BINDIR); then : ; else $(MKDIR) $(BINDIR); fi
+	if test -d $(LIBDIR); then : ; else $(MKDIR) $(LIBDIR); fi
+	cd asmrun; $(MAKE) install
+	cd byterun; $(MAKE) -i install
+	ln -sf $(LIBDIR)/caml $(PREFIX)/include
+	cd stdlib; cp *.cmi *.mli *.ml $(LIBDIR); $(MAKE) installopt
+	for i in $(OTHERLIBRARIES); \
+	  do (cd otherlibs/$$i; $(MAKE) -i install; $(MAKE) installopt) || exit $$?; done
+	cp ocamlopt ocamlopt.opt tools/ocamlmklib $(BINDIR)
+
 clean:: partialclean
 
 # The compiler
 
 ocamlc: $(COMPOBJS)
-	$(CAMLC) $(LINKFLAGS) -o ocamlc $(COMPOBJS)
+	ocamlc.opt $(LINKFLAGS) -o ocamlc $(COMPOBJS)
 	@sed -e 's|@compiler@|$$topdir/boot/ocamlrun $$topdir/ocamlc|' \
 	  driver/ocamlcomp.sh.in > ocamlcomp.sh
 	@chmod +x ocamlcomp.sh
@@ -337,8 +382,8 @@ partialclean::
 # The native-code compiler
 
 ocamlopt: $(OPTOBJS)
-	$(CAMLC) $(LINKFLAGS) -o ocamlopt $(OPTOBJS)
-	@sed -e 's|@compiler@|$$topdir/boot/ocamlrun $$topdir/ocamlopt|' \
+	ocamlc.opt $(LINKFLAGS) -o ocamlopt $(OPTOBJS)
+	@sed -e 's|@compiler@|ocamlrun $$topdir/ocamlopt|' \
 	  driver/ocamlcomp.sh.in > ocamlcompopt.sh
 	@chmod +x ocamlcompopt.sh
 
@@ -376,12 +421,12 @@ utils/config.ml: utils/config.mlp config/Makefile
 	sed -e 's|%%LIBDIR%%|$(LIBDIR)|' \
 	    -e 's|%%BYTERUN%%|$(BINDIR)/ocamlrun|' \
 	    -e 's|%%CCOMPTYPE%%|cc|' \
-	    -e 's|%%BYTECC%%|$(BYTECC) $(BYTECCCOMPOPTS) $(SHAREDCCCOMPOPTS)|' \
-	    -e 's|%%NATIVECC%%|$(NATIVECC) $(NATIVECCCOMPOPTS)|' \
+	    -e 's|%%BYTECC%%|$(CROSSCC) $(BYTECCCOMPOPTS) $(SHAREDCCCOMPOPTS)|' \
+	    -e 's|%%NATIVECC%%|$(CROSSCC) $(NATIVECCCOMPOPTS)|' \
 	    -e 's|%%PACKLD%%|$(PACKLD)|' \
 	    -e 's|%%BYTECCLIBS%%|$(BYTECCLIBS)|' \
 	    -e 's|%%NATIVECCLIBS%%|$(NATIVECCLIBS)|' \
-	    -e 's|%%RANLIBCMD%%|$(RANLIBCMD)|' \
+	    -e 's|%%RANLIBCMD%%|$(CROSS)$(RANLIBCMD)|' \
 	    -e 's|%%CC_PROFILE%%|$(CC_PROFILE)|' \
 	    -e 's|%%ARCH%%|$(ARCH)|' \
 	    -e 's|%%MODEL%%|$(MODEL)|' \
@@ -474,7 +519,7 @@ beforedepend:: bytecomp/opcodes.ml
 # The predefined exceptions and primitives
 
 byterun/primitives:
-	cd byterun; $(MAKE) primitives
+	cd byterun; $(MAKE) BYTECC="$(CROSSCC)" primitives
 
 bytecomp/runtimedef.ml: byterun/primitives byterun/fail.h
 	(echo 'let builtin_exceptions = [|'; \
@@ -545,7 +590,7 @@ beforedepend:: asmcomp/emit.ml
 
 tools/cvt_emit: tools/cvt_emit.mll
 	cd tools; \
-	$(MAKE) CAMLC="../$(CAMLRUN) ../boot/ocamlc -I ../stdlib" cvt_emit
+	$(MAKE) CAMLC="ocamlc.opt -I ../stdlib" CAMLLEX=ocamllex cvt_emit
 
 # The "expunge" utility
 
@@ -594,7 +639,7 @@ library-cross:
 	cd stdlib; $(MAKE) RUNTIME=../byterun/ocamlrun all
 
 libraryopt:
-	cd stdlib; $(MAKE) allopt
+	cd stdlib; $(MAKE) RUNTIME=ocamlrun COMPILER=$$(which ocamlc) allopt
 
 partialclean::
 	cd stdlib; $(MAKE) clean
@@ -659,7 +704,7 @@ otherlibraries: ocamltools
 
 otherlibrariesopt:
 	for i in $(OTHERLIBRARIES); do \
-	  (cd otherlibs/$$i; $(MAKE) allopt) || exit $$?; \
+	  (cd otherlibs/$$i; $(MAKE) CC="$(CROSSCC)" BYTECC="$(CROSSCC)" CAMLC="../../ocamlcomp.sh -I ../unix" CAMLRUN= allopt) || exit $$?; \
 	done
 
 partialclean::
