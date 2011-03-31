@@ -32,7 +32,7 @@
 
 typedef signed char schar;
 
-#if SIZEOF_PTR == SIZEOF_LONG
+#if SIZEOF_PTR == SIZEOF_LONG && SIZEOF_LONG == 8
 /* Standard models: ILP32 or I32LP64 */
 typedef long intnat;
 typedef unsigned long uintnat;
