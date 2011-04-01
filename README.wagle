@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Files named "README.wagle" will be sprinkled throughout the directory
+tree to make the README's written by me stand out.
+
+-- Perry Wagle (wagle@mac.com)
+-------------------------------------------------------------------------------
+
+In this directory, there are presently two subdirs:
+
+clean-distribution:
+	contains the pure/clean expansions of the tarballs from inria.
+
+x86_64-to-arm: 
+	contains my current effort to build a x86_64 to ARM ocaml
+	cross-compiler.  As of March 31, 2011, ocaml 3.12.0 gets
+	confused about the size of a long on the ARM target if
+	compiled on a 64 bit machine (like the x86_64).  My port goes
+	to great lengths to try to do everything in 32 bit mode (gcc
+	-m32, 32-bit ocaml, etc).  It might be easier just to get it
+	running on a x86_32.

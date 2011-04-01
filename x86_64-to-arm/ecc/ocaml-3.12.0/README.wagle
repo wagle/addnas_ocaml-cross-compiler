@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Files named "README.wagle" will be sprinkled throughout the directory
+tree to make the README's written by me stand out.
+
+-- Perry Wagle (wagle@mac.com)
+-------------------------------------------------------------------------------
+
+I build this on an x86_64 with doing a lot of 32 bit emulation.  You
+might have an easier time just building it on an x86_32.
+
+
+See the README.cross file.
+

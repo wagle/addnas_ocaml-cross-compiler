@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Files named "README.wagle" will be sprinkled throughout the directory
+tree to make the README's written by me stand out.
+
+-- Perry Wagle (wagle@mac.com)
+-------------------------------------------------------------------------------
+
+One directory:
+
+
+ocaml-3.12.0: top level of my port of the inria build tree.

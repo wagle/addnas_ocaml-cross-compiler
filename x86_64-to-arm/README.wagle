@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Files named "README.wagle" will be sprinkled throughout the directory
+tree to make the README's written by me stand out.
+
+-- Perry Wagle (wagle@mac.com)
+-------------------------------------------------------------------------------
+
+Presently, I am working with two different cross-compiler patches to ocaml:
+
+
+inria: forward patched (from ocaml 3.11.0 to 3.12.0) from the webpage:
+
+   http://brion.inria.fr/gallium/index.php/CrossCompiler
+
+
+ecc: emailed from Eric Cooper <ecc@cmu.edu>

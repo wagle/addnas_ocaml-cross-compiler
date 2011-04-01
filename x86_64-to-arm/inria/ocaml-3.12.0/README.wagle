@@ -1,0 +1,19 @@
+Files named "README.wagle" will be sprinkled throughout the directory
+tree to make the README's written by me stand out.
+
+-- Perry Wagle (wagle@mac.com)
+
+
+If you build this on an x86_64, you will need dozens of 32 bit
+libraries installed.  I suggest trying it on an x86_32, but I haven't
+tested doing that yet.  You will also need a regular 32-bit ocaml
+installed.
+
+
+(1) ./configure is already run.  Edit ./config/Makefile for a number
+of parameters you will need to change for your own install.
+
+(2) "make cross"
+
+(3) "make installcross"..  Make sure you are installing in the
+directory you want to (see (1) above).
