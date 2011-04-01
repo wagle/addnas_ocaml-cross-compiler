@@ -1,0 +1,6 @@
+3.11.0
+
+# The version string is the first line of this file.
+# It must be in the format described in stdlib/sys.mli
+
+# $Id: VERSION,v 1.26.2.7 2008/12/03 16:16:30 doligez Exp $
