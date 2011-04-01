@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# "oracle" for ARM target
+
+output=""
+ret=0
+
+case $(basename $1 .c) in
+
+    ansi)	;;
+    async_io)	;;
+    dblalign)	;;
+    divmod)	;;
+    endian)	ret=1 ;;
+    getgroups)	;;
+    initgroups)	;;
+    int64align) ;;
+    longlong)	ret=1 ;;
+    setgroups)	;;
+    signals)	;;
+    sizes)	output="4 4 4 2" ;;
+
+    *)	echo $0: unexpected test $1 1>&2
+	exit 99
+esac
+
+[ "$output" ] && echo "$output"
+exit $ret

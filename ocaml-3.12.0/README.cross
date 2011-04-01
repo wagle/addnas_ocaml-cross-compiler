@@ -1,0 +1,66 @@
+Building OCaml cross-compilers for ARM targets
+
+Eric Cooper <ecc@cmu.edu>
+October 2010
+
+
+INTRODUCTION
+
+This patch modifies the OCaml 3.12 build system to generate OCaml
+cross-compilers and related tools and libraries for arm-linux targets.
+
+
+STATUS AND LIMITATIONS
+
+I have built and tested OCaml cross-compilers on an amd64 host running
+Debian with the following targets:
+  * an ARM-based router running OpenWrt
+  * a Seagate DockStar (similar to a Marvell Sheevaplug) running Debian
+
+I have not built cross-versions of the dbm, graphics, or labltk libraries.
+
+I have done only limited testing of the cross-tools and libraries.  Any
+suggestions for a test suite would be welcome.
+
+
+PREREQUISITES
+
+You need to be able to cross-compile a "Hello, world!" C program and
+run it on your target system before going any further.
+
+You will need cross-versions of the gcc and binutils packages
+(specifically, gcc, as, objcopy, nm, and ranlib), as well as the basic
+C libraries and headers.  The tools must be on your PATH.
+
+You also need the OCaml source tarball:
+    http://caml.inria.fr/pub/distrib/ocaml-3.12/ocaml-3.12.0.tar.gz
+or
+    http://caml.inria.fr/pub/distrib/ocaml-3.12/ocaml-3.12.0.tar.bz2
+
+
+CONFIGURING
+
+1. Un-tar the source tarball.
+2. Apply the cross-arm patch.
+3. Edit the "configure" script:
+   a. Specify the desired value for the "prefix" variable (the
+      directory under which the cross-compilers and cross-libraries
+      will be installed).  You must have permission to create files
+      and directories there.
+   b. Specify the prefix for your ARM cross tools.  For example, if
+      your cross-versions of gcc, as, etc. are "arm-linux-gcc",
+      "arm-linux-as", etc., then specify
+          cross=arm-linux-
+      (note the trailing '-')
+
+
+BUILDING
+
+1. Run "./configure"
+2. Run "make cross"
+
+
+INSTALLING
+
+If the build finishes without errors, you can install the resulting
+tools by running "make installcross".
