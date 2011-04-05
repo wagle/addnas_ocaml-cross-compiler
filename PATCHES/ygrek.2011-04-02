@@ -6,13 +6,13 @@ index 466fb30..0be8fd9 100644
  
  # Compile the cross-compiler
  cross:
--   cd boot && cp `which ocamlrun` .
--   cd byterun && cp `which ocamlrun` .
-+   cd boot && cp $(BOOT_OCAMLRUN) .
-+   cd byterun && cp $(BOOT_OCAMLRUN) .
-    cd stdlib; $(MAKE) COMPILER=../boot/ocamlc all
-    cd stdlib; cp $(LIBFILES) ../boot
-    cd yacc; $(MAKE) all
+-	cd boot && cp `which ocamlrun` .
+-	cd byterun && cp `which ocamlrun` .
++	cd boot && cp $(BOOT_OCAMLRUN) .
++	cd byterun && cp $(BOOT_OCAMLRUN) .
+ 	cd stdlib; $(MAKE) COMPILER=../boot/ocamlc all
+ 	cd stdlib; cp $(LIBFILES) ../boot
+ 	cd yacc; $(MAKE) all
 diff --git x86_64-to-arm/inria/ocaml-3.12.0/config/Makefile x86_64-to-arm/inria/ocaml-3.12.0/config/Makefile
 index 3b3bdae..960d711 100644
 --- x86_64-to-arm/inria/ocaml-3.12.0/config/Makefile
@@ -53,9 +53,9 @@ index 454e33d..2812109 100644
 +++ x86_64-to-arm/inria/ocaml-3.12.0/otherlibs/systhreads/Makefile
 @@ -82,6 +82,7 @@ install:
  installopt:
-    cp libthreadsnat.a $(LIBDIR)/libthreadsnat.a
-    cd $(LIBDIR); $(TARGET_RANLIB) libthreadsnat.a
-+   if test -d $(LIBDIR)/threads; then :; else mkdir $(LIBDIR)/threads; fi
-    cp $(THREAD_OBJS:.cmo=.cmx) threads.cmxa threads.a $(LIBDIR)/threads
-    cd $(LIBDIR)/threads; $(TARGET_RANLIB) threads.a
+ 	cp libthreadsnat.a $(LIBDIR)/libthreadsnat.a
+ 	cd $(LIBDIR); $(TARGET_RANLIB) libthreadsnat.a
++	if test -d $(LIBDIR)/threads; then :; else mkdir $(LIBDIR)/threads; fi
+ 	cp $(THREAD_OBJS:.cmo=.cmx) threads.cmxa threads.a $(LIBDIR)/threads
+ 	cd $(LIBDIR)/threads; $(TARGET_RANLIB) threads.a
 
