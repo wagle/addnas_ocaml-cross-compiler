@@ -1,0 +1,61 @@
+diff --git x86_64-to-arm/inria/ocaml-3.12.0/Makefile x86_64-to-arm/inria/ocaml-3.12.0/Makefile
+index 466fb30..0be8fd9 100644
+--- x86_64-to-arm/inria/ocaml-3.12.0/Makefile
++++ x86_64-to-arm/inria/ocaml-3.12.0/Makefile
+@@ -273,8 +273,8 @@ base.opt: checkstack runtime core ocaml opt-core ocamlc.opt otherlibraries \
+ 
+ # Compile the cross-compiler
+ cross:
+-	cd boot && cp `which ocamlrun` .
+-	cd byterun && cp `which ocamlrun` .
++	cd boot && cp $(BOOT_OCAMLRUN) .
++	cd byterun && cp $(BOOT_OCAMLRUN) .
+ 	cd stdlib; $(MAKE) COMPILER=../boot/ocamlc all
+ 	cd stdlib; cp $(LIBFILES) ../boot
+ 	cd yacc; $(MAKE) all
+diff --git x86_64-to-arm/inria/ocaml-3.12.0/config/Makefile x86_64-to-arm/inria/ocaml-3.12.0/config/Makefile
+index 3b3bdae..960d711 100644
+--- x86_64-to-arm/inria/ocaml-3.12.0/config/Makefile
++++ x86_64-to-arm/inria/ocaml-3.12.0/config/Makefile
+@@ -15,8 +15,9 @@
+ 
+ ### Compile-time configuration
+ 
++BOOT_OCAMLRUN=/opt/ocaml-3.12.0/bin/ocamlrun
+ ### begin WAGLE
+-PREFIX=/opt/ocaml-cross-arm
++PREFIX=/opt/ocaml-3.12.0-wagle-armel-cross
+ SYSTHREAD_SUPPORT=false
+ #SYSTHREAD_SUPPORT=true
+ SUPPORTS_SHARED_LIBRARIES=true
+@@ -48,7 +49,8 @@ TOOLCHAIN=cc
+ NATDYNLINK=true
+ CMXS=cmxs
+ #XGCC=arm-none-linux-gnueabi-
+-XXX=/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-
++#XXX=/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-
++XXX=arm-linux-gnueabi-
+ 
+ ### end WAGLE
+ 
+@@ -139,7 +141,7 @@ SYSLIB=-l$(1)
+ 
+ ### How to build a static library
+ MKLIB=$(TARGET_AR) rc \$(1) \$(2); $(TARGET_RANLIB) \$(1)
+-#ml let mklib out files opts = Printf.sprintf "/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ar rc %s %s %s; /root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ranlib %s" out opts files out;;
++#ml let mklib out files opts = Printf.sprintf "arm-linux-gnueabi-ar rc %s %s %s; arm-linux-gnueabi-ranlib %s" out opts files out;;
+ 
+ ### Shared library support
+ # Extension for shared libraries: so if supported, a if not supported
+diff --git x86_64-to-arm/inria/ocaml-3.12.0/otherlibs/systhreads/Makefile x86_64-to-arm/inria/ocaml-3.12.0/otherlibs/systhreads/Makefile
+index 454e33d..2812109 100644
+--- x86_64-to-arm/inria/ocaml-3.12.0/otherlibs/systhreads/Makefile
++++ x86_64-to-arm/inria/ocaml-3.12.0/otherlibs/systhreads/Makefile
+@@ -82,6 +82,7 @@ install:
+ installopt:
+ 	cp libthreadsnat.a $(LIBDIR)/libthreadsnat.a
+ 	cd $(LIBDIR); $(TARGET_RANLIB) libthreadsnat.a
++	if test -d $(LIBDIR)/threads; then :; else mkdir $(LIBDIR)/threads; fi
+ 	cp $(THREAD_OBJS:.cmo=.cmx) threads.cmxa threads.a $(LIBDIR)/threads
+ 	cd $(LIBDIR)/threads; $(TARGET_RANLIB) threads.a
+

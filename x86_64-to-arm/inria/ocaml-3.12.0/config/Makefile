@@ -15,8 +15,10 @@
 
 ### Compile-time configuration
 
+#BOOT_OCAMLRUN=/opt/ocaml-3.12.0/bin/ocamlrun
+BOOT_OCAMLRUN=/usr/local/bin/ocamlrun
 ### begin WAGLE
-PREFIX=/opt/ocaml-cross-arm
+PREFIX=/opt/ocaml-3.12.0-wagle-armel-cross
 SYSTHREAD_SUPPORT=false
 #SYSTHREAD_SUPPORT=true
 SUPPORTS_SHARED_LIBRARIES=true
@@ -47,8 +49,8 @@ CCOMPTYPE=cc
 TOOLCHAIN=cc
 NATDYNLINK=true
 CMXS=cmxs
-#XGCC=arm-none-linux-gnueabi-
-XXX=/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-
+#XXX=arm-linux-gnueabi-
+XXX=arm-linux-uclibcgnueabi-
 
 ### end WAGLE
 
@@ -139,7 +141,8 @@ SYSLIB=-l$(1)
 
 ### How to build a static library
 MKLIB=$(TARGET_AR) rc \$(1) \$(2); $(TARGET_RANLIB) \$(1)
-#ml let mklib out files opts = Printf.sprintf "/root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ar rc %s %s %s; /root/proj/1470_Firmware_Source/buildroot-7821TSI/build_arm/staging_dir/usr/bin/arm-linux-uclibcgnueabi-ranlib %s" out opts files out;;
+# the below magic needs definitions of TARGET_AR and TARGET_RANLIB above
+#ml let mklib out files opts = Printf.sprintf "%s rc %s %s %s; %s %s" target_ar out opts files target_ranlib out;;
 
 ### Shared library support
 # Extension for shared libraries: so if supported, a if not supported

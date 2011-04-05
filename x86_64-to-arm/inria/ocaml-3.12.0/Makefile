@@ -273,8 +273,8 @@ base.opt: checkstack runtime core ocaml opt-core ocamlc.opt otherlibraries \
 
 # Compile the cross-compiler
 cross:
-	cd boot && cp `which ocamlrun` .
-	cd byterun && cp `which ocamlrun` .
+	cd boot && cp $(BOOT_OCAMLRUN) .
+	cd byterun && cp $(BOOT_OCAMLRUN) .
 	cd stdlib; $(MAKE) COMPILER=../boot/ocamlc all
 	cd stdlib; cp $(LIBFILES) ../boot
 	cd yacc; $(MAKE) all
