@@ -15,11 +15,9 @@
 
 ### Compile-time configuration
 
-#BOOT_OCAMLRUN=/opt/ocaml-3.12.0/bin/ocamlrun
-#BOOT_OCAMLRUN=/usr/local/bin/ocamlrun
-BOOT_OCAMLRUN=/opt/ocaml-to-x86_32/bin/ocamlrun
+BOOT_OCAMLRUN=/opt/ocaml-3.12.0-x86_32/bin/ocamlrun
 ### begin WAGLE
-PREFIX=/opt/ocaml-to-armel
+PREFIX=/opt/ocaml-3.12.0-armel
 SYSTHREAD_SUPPORT=false
 #SYSTHREAD_SUPPORT=true
 SUPPORTS_SHARED_LIBRARIES=true
