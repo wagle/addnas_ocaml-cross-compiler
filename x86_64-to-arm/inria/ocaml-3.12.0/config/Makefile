@@ -15,9 +15,13 @@
 
 ### Compile-time configuration
 
-BOOT_OCAMLRUN=/opt/ocaml-3.12.0-x86_32/bin/ocamlrun
 ### begin WAGLE
+
+BOOT_OCAMLRUN=/opt/ocaml-3.12.0-x86_32/bin/ocamlrun
 PREFIX=/opt/ocaml-3.12.0-armel
+#XXX=arm-linux-gnueabi-
+XXX=arm-linux-uclibcgnueabi-
+
 SYSTHREAD_SUPPORT=false
 #SYSTHREAD_SUPPORT=true
 SUPPORTS_SHARED_LIBRARIES=true
@@ -48,8 +52,6 @@ CCOMPTYPE=cc
 TOOLCHAIN=cc
 NATDYNLINK=true
 CMXS=cmxs
-XXX=arm-linux-gnueabi-
-#XXX=arm-linux-uclibcgnueabi-
 
 ### end WAGLE
 
